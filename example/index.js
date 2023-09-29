@@ -1,4 +1,4 @@
-import {Slider} from "https://raw.githubusercontent.com/Krokochik/slider/master/src/slider.js";
+import {Slider} from "https://rawcdn.githack.com/Krokochik/slider/main/src/slider.js?min=1";
 
 const carousel = new Slider(document.querySelector("#carousel"));
 for (let i = 0; i < 12; i++) {

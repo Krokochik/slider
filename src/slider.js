@@ -38,24 +38,28 @@ export class Slider {
                 className: "slider__content"
             });
         this.elements.forEach(element => {
-            console.log(this.elementWidth)
             element.style.width = this.elementWidth;
             this.content.appendChild(element);
         })
+
         let firstElementIndex = 0;
+        const screenCount = () => {
+            return Math.floor(this.content.offsetWidth / this.container.offsetWidth);
+        };
+        const transform = () => {
+            this.content.style.transform = `translate(calc(${this.elementWidth} * ${-firstElementIndex}))`;
+        };
         this.controls.querySelectorAll("button")[0].addEventListener("click", () => {
-            const screenCount = Math.floor(this.content.offsetWidth / this.container.offsetWidth);
-            firstElementIndex -= this.elements.length / screenCount;
+            firstElementIndex -= this.elements.length / screenCount();
             if (firstElementIndex < 0) firstElementIndex = 0;
-            this.content.style.transform = `translate(calc(${this.elementWidth} * ${-firstElementIndex}))`
+            transform();
         })
         this.controls.querySelectorAll("button")[1].addEventListener("click", () => {
-            const screenCount = Math.floor(this.content.offsetWidth / this.container.offsetWidth);
-            const elementOnScreen = this.elements.length / screenCount;
-            firstElementIndex += this.elements.length / screenCount;
-            if (!(firstElementIndex + elementOnScreen > screenCount * elementOnScreen))
-                this.content.style.transform = `translate(calc(${this.elementWidth} * ${-firstElementIndex}))`;
-            else firstElementIndex -= this.elements.length / screenCount;
+            const elementsOnScreen = this.elements.length / screenCount;
+            firstElementIndex += elementsOnScreen;
+            if (!(firstElementIndex + elementsOnScreen > screenCount * elementsOnScreen))
+                transform();
+            else firstElementIndex -= elementsOnScreen;
         })
         this.container.appendChild(this.content);
         this.node.appendChild(this.container);
