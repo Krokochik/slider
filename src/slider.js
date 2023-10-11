@@ -55,9 +55,9 @@ export class Slider {
             transform();
         })
         this.controls.querySelectorAll("button")[1].addEventListener("click", () => {
-            const elementsOnScreen = this.elements.length / screenCount;
+            const elementsOnScreen = this.elements.length / screenCount();
             firstElementIndex += elementsOnScreen;
-            if (!(firstElementIndex + elementsOnScreen > screenCount * elementsOnScreen))
+            if (!(firstElementIndex + elementsOnScreen > screenCount() * elementsOnScreen))
                 transform();
             else firstElementIndex -= elementsOnScreen;
         })
