@@ -1,2 +1,2 @@
-# slider
-If images doesn't load try to enable vpn
+# Slider
+A universal js slider for your (and my ^_^) apps.
